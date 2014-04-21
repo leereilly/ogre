@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'oily_png'
+require 'open-uri'
 
 #          __,='`````'=/__
 #         '//  (o) \(o) \ `'         _,-,
@@ -32,8 +33,12 @@ get '/' do
 end
 
 get '/:user/?' do
-  @user = params[:user]
+  user = params[:user]
 
+  open("#{user}.jpeg", 'wb') do |file|
+    file << open("https://github.com/#{user}.png").read
+  end
+  
   erb :user
 end
 
