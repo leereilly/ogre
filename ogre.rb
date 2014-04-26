@@ -2,6 +2,7 @@ require 'rubygems'
 require 'sinatra'
 require 'oily_png'
 require 'open-uri'
+require 'mini_magick'
 
 #          __,='`````'=/__
 #         '//  (o) \(o) \ `'         _,-,
@@ -38,7 +39,7 @@ get '/:user/?' do
   open("#{user}.jpeg", 'wb') do |file|
     file << open("https://github.com/#{user}.png").read
   end
-  
+
   erb :user
 end
 
