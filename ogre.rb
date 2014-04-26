@@ -2,7 +2,7 @@ require 'rubygems'
 require 'sinatra'
 require 'oily_png'
 require 'open-uri'
-require 'mini_magick'
+require 'rmagick'
 require 'octokit'
 
 get '/' do
@@ -19,12 +19,15 @@ get '/:user/?' do
 
   # create a local JPG
   open("public/user_jpgs/#{@user.login}.jpg", 'wb') do |file|
-    file << open("#{@user.avatar_url}s=182").read
+    file << open("#{@user.avatar_url}s=82").read
   end
 
   # convert to PNG
-  image = MiniMagick::Image.open("public/user_jpgs/#{@user.login}.jpg")
-  image.write "public/user_pngs/#{@user.login}.png"
+  # image = MiniMagick::Image.open("public/user_jpgs/#{@user.login}.jpg")
+  # image.write "public/user_pngs/#{@user.login}.png"
+  thumb = Magick::Image.read("public/user_jpgs/#{@user.login}.jpg").first
+  thumb.format = "PNG"
+  thumb.write("public/user_pngs/#{@user.login}.png")
 
   # add avatar to background
   background = ChunkyPNG::Image.from_file('background.png')
