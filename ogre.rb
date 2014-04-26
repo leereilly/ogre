@@ -5,6 +5,26 @@ require 'open-uri'
 require 'rmagick'
 require 'octokit'
 
+require 'cgi' unless defined?(CGI)
+require 'digest' unless defined?(Digest)
+
+class Url2png
+  attr_reader :apikey, :secret, :query_string, :token
+  def initialize options
+
+    @apikey = ENV['api_key']
+    @secret = ENV['private_key']
+
+    @query_string = options.sort.map { |k,v| "#{CGI::escape(k.to_s)}=#{CGI::escape(v.to_s)}" }.join("&")
+    @token = Digest::MD5.hexdigest(query_string + secret)
+  end
+
+  def url
+    "http://api.url2png.com/v6/#{apikey}/#{token}/png/?#{query_string}"
+  end
+
+end
+
 get '/' do
   background = ChunkyPNG::Image.from_file('background.png')
   blacktocat = ChunkyPNG::Image.from_file('leereilly.png')
@@ -35,6 +55,17 @@ get '/:user/?' do
   background.compose!(user_image, 420, 448)
   background.save("public/user_og/#{@user.login}.png", :fast_rgba)
 
+  # get user profile image
+  options = {
+    url:"https://github.com/#{@user.login}",
+    thumbnail_max_width: 500,
+    viewport: "1480x1037",
+    fullpage: true,
+    unique: Time.now.to_i / 60       # forces a unique request at most once an hour
+  }
+
+  @profile_image_url = Url2png.new(options).url
+
   erb :user
 end
 
@@ -44,6 +75,7 @@ get '/:user/:repo/?' do
 
   erb :repo
 end
+
 
 #          __,='`````'=/__
 #         '//  (o) \(o) \ `'         _,-,
