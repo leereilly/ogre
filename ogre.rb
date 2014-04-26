@@ -3,6 +3,7 @@ require 'sinatra'
 require 'oily_png'
 require 'open-uri'
 require 'mini_magick'
+require 'octokit'
 
 #          __,='`````'=/__
 #         '//  (o) \(o) \ `'         _,-,
