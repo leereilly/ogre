@@ -38,13 +38,13 @@ get '/:user/?' do
   @user = Octokit.user params[:user]
 
   # create a local JPG
-  open("user_jpgs/#{@user.login}.jpg", 'wb') do |file|
+  open("public/user_jpgs/#{@user.login}.jpg", 'wb') do |file|
     file << open("#{@user.avatar_url}s=182").read
   end
 
   # convert to PNG
-  #image = MiniMagick::Image.open("leereilly.jpeg")
-  #image.write "user_jpgs/#{@user.login}.png"
+  image = MiniMagick::Image.open("public/user_jpgs/#{@user.login}.jpg")
+  image.write "public/user_pngs/#{@user.login}.png"
 
   erb :user
 end
