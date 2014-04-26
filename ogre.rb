@@ -5,26 +5,6 @@ require 'open-uri'
 require 'mini_magick'
 require 'octokit'
 
-#          __,='`````'=/__
-#         '//  (o) \(o) \ `'         _,-,
-#         //|     ,_)   (`\      ,-'`_,-\
-#       ,-~~~\  `'==='  /-,      \==```` \__
-#      /        `----'     `\     \       \/
-#   ,-`                  ,   \  ,.-\       \
-#  /      ,               \,-`\`_,-`\_,..--'\
-# ,`    ,/,              ,>,   )     \--`````\
-# (      `\`---'`  `-,-'`_,<   \      \_,.--'`
-#  `.      `--. _,-'`_,-`  |    \
-#   [`-.___   <`_,-'`------(    /
-#   (`` _,-\   \ --`````````|--`
-#    >-`_,-`\,-` ,          |
-#  <`_,'     ,  /\          /
-#   `  \/\,-/ `/  \/`\_/V\_/
-#      (  ._. )    ( .__. )
-#      |      |    |      |
-#       \,---_|    |_---./
-#       ooOO(_)    (_)OOoo
-
 get '/' do
   background = ChunkyPNG::Image.from_file('background.png')
   blacktocat = ChunkyPNG::Image.from_file('leereilly.png')
@@ -46,6 +26,12 @@ get '/:user/?' do
   image = MiniMagick::Image.open("public/user_jpgs/#{@user.login}.jpg")
   image.write "public/user_pngs/#{@user.login}.png"
 
+  # add avatar to background
+  background = ChunkyPNG::Image.from_file('background.png')
+  user_image = ChunkyPNG::Image.from_file("public/user_pngs/#{@user.login}.png")
+  background.compose!(user_image, 420, 448)
+  background.save("public/user_og/#{@user.login}.png", :fast_rgba)
+
   erb :user
 end
 
@@ -55,3 +41,23 @@ get '/:user/:repo/?' do
 
   erb :repo
 end
+
+#          __,='`````'=/__
+#         '//  (o) \(o) \ `'         _,-,
+#         //|     ,_)   (`\      ,-'`_,-\
+#       ,-~~~\  `'==='  /-,      \==```` \__
+#      /        `----'     `\     \       \/
+#   ,-`                  ,   \  ,.-\       \
+#  /      ,               \,-`\`_,-`\_,..--'\
+# ,`    ,/,              ,>,   )     \--`````\
+# (      `\`---'`  `-,-'`_,<   \      \_,.--'`
+#  `.      `--. _,-'`_,-`  |    \
+#   [`-.___   <`_,-'`------(    /
+#   (`` _,-\   \ --`````````|--`
+#    >-`_,-`\,-` ,          |
+#  <`_,'     ,  /\          /
+#   `  \/\,-/ `/  \/`\_/V\_/
+#      (  ._. )    ( .__. )
+#      |      |    |      |
+#       \,---_|    |_---./
+#       ooOO(_)    (_)OOoo
