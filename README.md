@@ -17,3 +17,12 @@ ruby ogre.rb
 ### LICENSE
 
 MIT
+
+### Bugs / Known Issues / Limitations
+
+* This is a proof-of-concept. 
+* It won't scale. 
+* Do not use this in production.
+* It is is 100% ~~bug~~ free.
+
+![Bugs](http://i.imgur.com/K8vsw.gif "Bugs")
