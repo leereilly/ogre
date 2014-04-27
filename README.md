@@ -1,3 +1,12 @@
-### OGRE
+### Installation
 
-![](http://4.bp.blogspot.com/-sWWHwbvRZqU/UHR-4aKJLPI/AAAAAAAAI7Q/tyko2abdZJU/s400/ogre_animation_by_cyderak-d3l58mg.gif)
+This is a [Sinatra](http://www.sinatrarb.com/) application, so you'll need to know a bit of Ruby-Fu to get it working.
+
+```bash
+git clone https://github.com/leereilly/ogre.git
+cd ogre
+bundle install
+ruby ogre.rb
+```
+
+![Open Graph Ruby Enforcer](http://i.imgur.com/uvmMmUe.png)
