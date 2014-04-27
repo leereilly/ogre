@@ -1,3 +1,7 @@
+**Ogre** (Open Graph Ruby Encoder) is a proof of concept for generating custom `og:image` metadata images dynamically on a per user basis e.g.
+
+![](background.png)
+
 ### Installation
 
 This is a [Sinatra](http://www.sinatrarb.com/) application, so you'll need to know a bit of Ruby-Fu to get it working. There are a couple of dependencies:
