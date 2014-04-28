@@ -17,7 +17,7 @@ get '/:user/?' do
 
   # create a local JPG
   open("public/user_jpgs/#{@user.login}.jpg", 'wb') do |file|
-    file << open("#{@user.avatar_url}s=82").read
+    file << open("#{@user.avatar_url}s=192").read
   end
 
   # convert JPG to PNG
@@ -28,7 +28,7 @@ get '/:user/?' do
   # add avatar to background
   background = ChunkyPNG::Image.from_file('background.png')
   user_image = ChunkyPNG::Image.from_file("public/user_pngs/#{@user.login}.png")
-  background.compose!(user_image, 420, 448)
+  background.compose!(user_image, 192, 291)
   background.save("public/user_og/#{@user.login}.png", :fast_rgba)
 
   # get user profile image
@@ -48,7 +48,7 @@ get '/:user/?' do
   end
 
   # add user profile to background (724x327)
-  background = ChunkyPNG::Image.from_file('background.png')
+  background = ChunkyPNG::Image.from_file("public/user_og/#{@user.login}.png")
   profile_image = ChunkyPNG::Image.from_file("public/user_profiles/#{@user.login}.png")
   background.compose!(profile_image, 724, 327)
   background.save("public/user_og/#{@user.login}.png", :fast_rgba)
