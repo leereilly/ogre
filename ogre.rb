@@ -9,11 +9,6 @@ require './lib/url2png'
 require './lib/startup'
 
 get '/' do
-  background = ChunkyPNG::Image.from_file('background.png')
-  blacktocat = ChunkyPNG::Image.from_file('leereilly.png')
-  background.compose!(blacktocat, 420, 448)
-  background.save('ogimage.png', :fast_rgba)
-
   erb :index
 end
 
@@ -25,12 +20,10 @@ get '/:user/?' do
     file << open("#{@user.avatar_url}s=82").read
   end
 
-  # convert to PNG
-  # image = MiniMagick::Image.open("public/user_jpgs/#{@user.login}.jpg")
-  # image.write "public/user_pngs/#{@user.login}.png"
-  thumb = Magick::Image.read("public/user_jpgs/#{@user.login}.jpg").first
-  thumb.format = "PNG"
-  thumb.write("public/user_pngs/#{@user.login}.png")
+  # convert JPG to PNG
+  png_image = Magick::Image.read("public/user_jpgs/#{@user.login}.jpg").first
+  png_image.format = "PNG"
+  png_image.write("public/user_pngs/#{@user.login}.png")
 
   # add avatar to background
   background = ChunkyPNG::Image.from_file('background.png')
@@ -41,13 +34,24 @@ get '/:user/?' do
   # get user profile image
   options = {
     url:"https://github.com/#{@user.login}",
-    thumbnail_max_width: 500,
-    viewport: "1480x1037",
-    fullpage: true,
+    thumbnail_max_width: 403,
+    thumbnail_max_height: 252,
+    viewport: "1024x768",
+    fullpage: false,
     unique: Time.now.to_i / 60       # forces a unique request at most once an hour
   }
 
-  @profile_image_url = Url2png.new(options).url
+  profile_image_url = Url2png.new(options).url
+
+  open("public/user_profiles/#{@user.login}.png", 'wb') do |file|
+    file << open(profile_image_url).read
+  end
+
+  # add user profile to background (724x327)
+  background = ChunkyPNG::Image.from_file('background.png')
+  profile_image = ChunkyPNG::Image.from_file("public/user_profiles/#{@user.login}.png")
+  background.compose!(profile_image, 724, 327)
+  background.save("public/user_og/#{@user.login}.png", :fast_rgba)
 
   erb :user
 end
