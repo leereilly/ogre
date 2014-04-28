@@ -20,12 +20,12 @@ ruby ogre.rb
 
 ### Usage
 
-Hitting http://localhost:4567/leereilly will generate the image to be used for the `og:image` metadata: 
+Hitting [http://localhost:4567/leereilly](http://localhost:4567/leereilly) will generate the image to be used for the `og:image` metadata: 
 
 ```html
 <meta property="og:image" content="http://localhost:4567/leereilly" />
 <meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="1200" />
+<meta property="og:image:height" content="620" />
 ```
 ### LICENSE
 
