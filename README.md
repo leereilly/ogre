@@ -27,6 +27,9 @@ Hitting [http://localhost:4567/leereilly](http://localhost:4567/leereilly) will 
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="620" />
 ```
+
+![](public/proposal.png)
+
 ### LICENSE
 
 MIT
