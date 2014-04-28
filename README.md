@@ -1,6 +1,6 @@
 **Ogre** (Open Graph Ruby Encoder) is a proof of concept app for generating custom `og:image` metadata images dynamically on a *per user basis* e.g.
 
-![](background.png)
+![](public/background.png)
 
 ### Installation
 
@@ -18,6 +18,15 @@ ruby ogre.rb
 
 ![Open Graph Ruby Enforcer](http://i.imgur.com/uvmMmUe.png)
 
+### Usage
+
+Hitting [http://localhost:4567/leereilly](http://localhost:4567/leereilly) will generate the image to be used for the `og:image` metadata: 
+
+```html
+<meta property="og:image" content="http://localhost:4567/leereilly" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="620" />
+```
 ### LICENSE
 
 MIT
