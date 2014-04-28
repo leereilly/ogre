@@ -16,6 +16,8 @@ bundle install
 ruby ogre.rb
 ```
 
+![Open Graph Ruby Enforcer](http://i.imgur.com/uvmMmUe.png)
+
 ### Usage
 
 Hitting http://localhost:4567/leereilly will generate the image to be used for the `og:image` metadata: 
@@ -25,9 +27,6 @@ Hitting http://localhost:4567/leereilly will generate the image to be used for t
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="1200" />
 ```
-
-![Open Graph Ruby Enforcer](http://i.imgur.com/uvmMmUe.png)
-
 ### LICENSE
 
 MIT
