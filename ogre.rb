@@ -36,9 +36,9 @@ get '/:user/?' do
     url:"https://github.com/#{@user.login}",
     thumbnail_max_width: 403,
     thumbnail_max_height: 252,
-    viewport: "1024x768",
+    viewport: "1100x700",
     fullpage: false,
-    unique: Time.now.to_i / 60       # forces a unique request at most once an hour
+    unique: Time.now.to_i / 60
   }
 
   profile_image_url = Url2png.new(options).url
