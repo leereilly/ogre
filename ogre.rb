@@ -48,17 +48,10 @@ get '/:user/?' do
   end
 
   # add user profile to background (724x327)
-  background = ChunkyPNG::Image.from_file("public/user_og/#{@user.login}.png")
+  background = ChunkyPNG::Image.from_file("public/user_og/#{@user.login}.png"  )
   profile_image = ChunkyPNG::Image.from_file("public/user_profiles/#{@user.login}.png")
   background.compose!(profile_image, 724, 327)
   background.save("public/user_og/#{@user.login}.png", :fast_rgba)
 
   erb :user
-end
-
-get '/:user/:repo/?' do
-  @user = params[:user]
-  @repo = params[:repo]
-
-  erb :repo
 end
