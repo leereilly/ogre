@@ -2,7 +2,7 @@ require 'rubygems'
 require 'sinatra'
 require 'oily_png'
 require 'open-uri'
-require 'rmagick'
+require 'RMagick'
 require 'octokit'
 
 require './lib/url2png'
