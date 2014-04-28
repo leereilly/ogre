@@ -28,7 +28,7 @@ get '/:user/?' do
   # add avatar to background
   background = ChunkyPNG::Image.from_file('public/background.png')
   user_image = ChunkyPNG::Image.from_file("public/user_pngs/#{@user.login}.png")
-  background.compose!(user_image, 192, 291)
+  background.compose!(user_image, 192, 290)
   background.save("public/user_og/#{@user.login}.png", :fast_rgba)
 
   # get user profile image
